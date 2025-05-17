@@ -1,0 +1,17 @@
+import os
+import re
+
+directory = "Sunset_LoRA/3_ImageTraining"
+
+os.chdir(directory)
+
+files = os.listdir()
+
+for filename in files:
+    match = re.match(r"Sunset_ \((\d+)\)(\.\w+)?", filename)
+    if match:
+        number = int(match.group(1))
+        ext = match.group(2) if match.group(2) else ''
+        new_name = f"sunset_{number:02d}{ext}"
+        os.rename(filename, new_name)
+        print(f"Renamed: {filename} -> {new_name}")
